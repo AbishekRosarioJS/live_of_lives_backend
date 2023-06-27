@@ -1,5 +1,5 @@
 import { Component ,OnInit} from '@angular/core';
-import { AngularFirestore, CollectionReference } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-categories',
@@ -18,13 +18,23 @@ export class CategoriesComponent implements OnInit{
     
     let categoryData = {
       category:formData.value.category
+
     }
+
+    let SubcategoryData = {
+      subcategory:formData.value.category
+
+    }
+
     this.service.collection('categories').add(categoryData).then(docRef =>  {
       console.log(docRef);
+
+      this.service.collection('categories').doc(docRef.id).collection('subcategories').add(SubcategoryData).then(docref1=>{
+        console.log(docref1);
+      })
     })
-    .catch(err=>{
-      console.log(err)
-    })
+    .catch(err=> {console.log(err) })
   }
+
 
 }
