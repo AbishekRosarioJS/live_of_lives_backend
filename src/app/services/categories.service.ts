@@ -34,15 +34,15 @@ export class CategoriesService {
 
 
   updateData (id:any, EditData:any) {
-      this.service.collection('categories').doc(id).update(EditData).then(docRef => {
+      this.service.doc(`categories/${id}`).update(EditData).then(docRef => {
       this.toastr.success('Data Updateed Successfully ...!');
     })
   }
 
- deleteData(id:any) {
-  this.service.collection('categories').doc(id).delete().then(docRef =>{
-    this.toastr.success('Data Deleteed Successfully ...!');
-  })
- }
+  deleteData(id:any) {
+    this.service.doc(`categories/${id}`).delete().then(docRef =>{
+      this.toastr.success('Data Deleteed Successfully ...!');
+    })
+  }
 
 }
