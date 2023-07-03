@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 //firestore
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment.development';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
+//angular editor
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,7 +40,9 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularEditorModule,
+    HttpClientModule
     
   ],
   providers: [],

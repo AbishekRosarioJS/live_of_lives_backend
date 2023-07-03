@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from 'src/app/services/categories.service';
 
+
+
+
 @Component({
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
