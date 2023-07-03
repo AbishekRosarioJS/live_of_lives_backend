@@ -13,11 +13,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>Title</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" (keyup)="onTitleChanged($event)">
                         </div>
                         <div class="form-group">
                             <label>Permalink</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" [(ngModel)] ='permalink' name="permalink" disabled>
                         </div>
                         <div class="form-group">
                             <label>Excepert</label>
@@ -33,12 +33,14 @@
                     <label for="">please select a post category</label>
                     <select class="form-control">
                         <option value="" disabled>please select a category</option>
+                        <option *ngFor="let category of categories" value="">{{category.data.category}}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="">post Image</label>
-                    <input type="file" class="form-control">
+                    <img [src]="imgSrc" class="form-control img-fluid img-preview">
+                    <input type="file" class="form-control" accept="image/*" (change)="showPreview($event)">
                 </div>
 
             </div>
