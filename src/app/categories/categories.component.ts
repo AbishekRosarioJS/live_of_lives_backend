@@ -9,31 +9,46 @@ import { Category } from '../models/category';
 })
 export class CategoriesComponent implements OnInit {
 
-  categoryArray: Category[] = [];
+  categoryArray:any;
   formCategory:any;
   formStatus:any ='Add';
+  categoryID:any;
 
   constructor(private categoryService: CategoriesService) {}
 
   ngOnInit(): void {
-    this.categoryService.loadData().subscribe((val: { id: string; data: unknown; }[]) => {
+    this.categoryService.loadData().subscribe(val=>{
       console.log(val);
-      this.categoryArray = val.map((item: { id: string; data: unknown; }) => item.data as Category);
+      this.categoryArray=val;
     });
   }
 
   onSubmit(formData: any) {
     let categoryData: Category = {
-      category: formData.value.category
+      category: formData.value.category,
+    
     };
-
-    this.categoryService.saveData(categoryData);
-    formData.reset();
+    
+    if(this.formStatus == 'Add'){
+      this.categoryService.saveData(categoryData);
+      formData.reset();
+    }
+    else if(this.formStatus =='Edit'){
+      this.categoryService.updateData(this.categoryID,categoryData);
+      formData.reset();
+      this.formStatus = 'Add'
+    }
+ 
   }
 
-  onEdit(category:any){
+  onEdit(category:any, id:any){
     this.formCategory = category;
     this.formStatus ='Edit'
-    
+    this.categoryID = id;
+  
+  }
+
+  onDelete(id:any){
+    this.categoryService.deleteData(id);
   }
 }

@@ -14,7 +14,7 @@ export class CategoriesService {
 
     this.service.collection('categories').add(data).then(docRef =>  {
       console.log(docRef);
-    this.toastr.success('Data Insert Successfully')
+    this.toastr.success('Data Insert Successfully...!')
     })
     .catch(err=> {console.log(err) })
   }
@@ -31,4 +31,18 @@ export class CategoriesService {
       })
     )
   }
+
+
+  updateData (id:any, EditData:any) {
+      this.service.collection('categories').doc(id).update(EditData).then(docRef => {
+      this.toastr.success('Data Updateed Successfully ...!');
+    })
+  }
+
+ deleteData(id:any) {
+  this.service.collection('categories').doc(id).delete().then(docRef =>{
+    this.toastr.success('Data Deleteed Successfully ...!');
+  })
+ }
+
 }
