@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //firestore
 import { AngularFireModule } from '@angular/fire/compat';
@@ -42,7 +43,8 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
     
   ],
   providers: [],

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 
@@ -16,7 +17,20 @@ export class NewPostComponent implements OnInit{
   selectedImg:any;
   categories:any;
 
- constructor(private categoryService : CategoriesService) {}
+  postForm: FormGroup;
+
+ constructor(private categoryService : CategoriesService,private fb: FormBuilder) {
+  
+  this.postForm = this.fb.group({
+    title: ['',[Validators.required,Validators.minLength(10)]],
+    permalink:['',Validators.required],
+    excerpt:['',[Validators.required,Validators.minLength(50)]],
+    category:['',Validators.required],
+    postImg:['',Validators.required],
+    content:['',Validators.required]
+  })
+
+ }
 
  ngOnInit(): void {
   this.categoryService.loadData().subscribe(val =>{
@@ -24,6 +38,11 @@ export class NewPostComponent implements OnInit{
   })
    
  }
+
+ get fc() {
+  return this.postForm.controls;
+ }
+
   onTitleChanged($event:any) {
 
     const title = $event.target.value;
@@ -40,6 +59,10 @@ export class NewPostComponent implements OnInit{
 
     reader.readAsDataURL($event?.target.files[0]);
     this.selectedImg =  $event.target.files[0];
+  }
+
+  onSubmit(){
+    console.log(this.postForm.value);
   }
 
 }
