@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Post } from 'src/app/models/post';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { PostsService } from 'src/app/services/posts.service';
 
 
 
@@ -20,7 +21,7 @@ export class NewPostComponent implements OnInit{
 
   postForm: FormGroup;
 
- constructor(private categoryService : CategoriesService,private fb: FormBuilder) {
+ constructor(private categoryService : CategoriesService,private fb: FormBuilder,private postService: PostsService) {
   
   this.postForm = this.fb.group({
     title: ['',[Validators.required,Validators.minLength(10)]],
@@ -84,7 +85,10 @@ export class NewPostComponent implements OnInit{
       status:'new',
       createdAt:new Date()
     }
-    console.log(postData);
+    this.postService.uploadImage(this.selectedImg,postData);
+    this.postForm.reset();
+    this.imgSrc = './assets/placeholder-image.png.png';
   }
+
 
 }
