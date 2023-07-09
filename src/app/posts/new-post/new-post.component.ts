@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Post } from 'src/app/models/post';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 
@@ -62,7 +63,28 @@ export class NewPostComponent implements OnInit{
   }
 
   onSubmit(){
-    console.log(this.postForm.value);
+    // console.log(this.postForm.value);
+
+    let splited = this.postForm.value.category.split('-');
+    console.log(splited);
+
+
+    const postData : Post = {
+      title:this.postForm.value.title,
+      permalink:this.postForm.value.permalink,
+      category:{
+        categoryId:splited[0],
+        category:splited[1]
+      },
+      postImgPath:'',
+      excerpt:this.postForm.value.excerpt,
+      content:this.postForm.value.content,
+      isFeatured:false,
+      views:0,
+      status:'new',
+      createdAt:new Date()
+    }
+    console.log(postData);
   }
 
 }
