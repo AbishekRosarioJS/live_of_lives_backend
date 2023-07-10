@@ -1,0 +1,12 @@
+.excerpt-cell {
+    max-width: 200px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.excerpt-cell:hover {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+}
