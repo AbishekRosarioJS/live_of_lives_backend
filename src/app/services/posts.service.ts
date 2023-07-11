@@ -17,7 +17,7 @@ export class PostsService {
     private router: Router,
     ) { }
 
-   uploadImage(selectedImage:any,postData:any){
+   uploadImage(selectedImage:any,postData:any,formStatus:any, id:any){
     const filePath = `postIMG/${Date.now()}`;
     console.log(filePath);
 
@@ -29,7 +29,11 @@ export class PostsService {
         postData.postImgPath = URL;
         console.log(postData);
 
-        this.saveData(postData); 
+        if(formStatus == 'Edit') {
+          this.updateData(id, postData);
+        }else{
+          this.saveData(postData); 
+        } 
         
       });
     });
@@ -55,6 +59,18 @@ export class PostsService {
          })
        })
      )
+   }
+
+   loadOneData(id:any){
+    // return this.service.collection('posts').doc(id).valueChanges();
+    return this.service.doc(`posts/${id}`).valueChanges();
+   }
+
+   updateData(id:any,postData:any){
+    this.service.doc(`posts/${id}`).update(postData).then(()=>{
+      this.toastr.success('Data Updated successfully');
+      this.router.navigate(['/posts']);
+    })
    }
    
 

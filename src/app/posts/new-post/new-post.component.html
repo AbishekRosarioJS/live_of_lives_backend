@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 text text-center">
-            <h3 class="text-theme-primary">Add New Post</h3>
-            <p class="mb-5">You Can add your new post here.</p>
+            <h3 class="text-theme-primary">{{formStatus}}Post</h3>
+            <p class="mb-5">You Can {{formStatus}} new post here.</p>
         </div>
     </div>
 
@@ -105,7 +105,7 @@
         </div>
 
         <div class="col-md-12 text-center mb-5">
-            <button class="btn btn-info bg-theme" [disabled]="postForm.invalid">Save</button>
+            <button class="btn btn-info bg-theme" [disabled]="postForm.invalid">{{formStatus}} post</button>
             <button class="btn btn-info bg-warning ml-3" routerLink="/posts">Back to Post</button>
         </div>
     </form>
